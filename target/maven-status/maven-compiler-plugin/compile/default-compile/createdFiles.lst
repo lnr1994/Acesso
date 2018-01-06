@@ -1,0 +1,5 @@
+com\AcessoPass\util\FabricaConexão.class
+com\AcessoPass\DAO\SenhaDAO.class
+br\AcessoPass\exception\ErroSistema.class
+com\AcessoPass\entidade\Senha.class
+com\AcessoPass\bean\SenhaBean.class

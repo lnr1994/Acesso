@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>Acesso Pass - Suas Senhas salvas com Segurança</title>
+    </h:head>
+    <h:body style="padding-top: 60px">
+        
+        <b:container>
+            <b:navBar class="navbar" brand="Acesso Pass" inverse="true" brandHref="#" fixed="top" >
+                <b:navbarLinks >
+                    <b:navLink value="home" iconAwesome="home" href="index.jsf"></b:navLink>
+                    <b:navLink value="Teste a Ferramenta" iconAwesome="fa-desktop" href="#"></b:navLink> 
+                </b:navbarLinks>
+            </b:navBar>
+        </b:container>
+
+        <p:messages autoUpdate="true" showDetail="true"></p:messages>
+
+
+        <b:container>
+            <b:jumbotron style="background: #4577B4; color: #FFFFFF;">
+
+                <f:metadata>
+                    <f:viewParam name="parametro" value="#{usuarioBean.usuario.nome}"></f:viewParam>
+                </f:metadata>
+                <f:param value="#{usuarioBean.usuario.nome}"></f:param>
+                <h2>Bem Vindo ao AcessoPass,#{usuarioBean.usuario.nome}</h2>
+                <h:outputLabel value="#{usuarioBean.usuario.nome}"></h:outputLabel>
+                <p>Cadastre Suas senhas: Teste a nossa ferramenta e veja como e facil utilizar. </p>
+            </b:jumbotron>
+            <h:form>
+
+
+                <b:panel title="Ver senhas" collapsible="false" look="primary" >
+
+
+                    <p>
+                        <b:commandButton size="lg" style=" background-color: #4577B4;"  action="#{senhaBean.adicionar()}" look="primary" value="Inserir Senha" update="@form"/>
+                        <b:commandButton size="lg" style=" background-color: whitesmoke; color: #4577B4" action="#{senhaBean.listar()}"  value="Atualizar tabela" look="primary" update="@form"/>
+                    </p>
+                    <br></br>
+                    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="10" cellspacing="5">
+                        <h:outputLabel value="Site:"></h:outputLabel>
+                        <p:inputText value="#{senhaBean.senha.origem}"></p:inputText>
+
+                        <h:outputLabel value="Pass:"></h:outputLabel>
+                        <p:inputText  value="#{senhaBean.senha.senha}"></p:inputText>
+
+
+                    </h:panelGrid>
+                    <p:dataTable style ="text-align: center;" value="#{senhaBean.senhas}"  var="senha">
+                        <p:column width="20%">
+                            <b:commandButton style=" background-color: #4577B4; color:white;"  value="Editar" action="#{senhaBean.editar(senha)}" update="@form" ></b:commandButton>
+                            <b:commandButton style=" background-color: #4577B4; color:white;"  value="Deletar" action="#{senhaBean.deletar(senha)}" update="@form" ></b:commandButton>
+                        </p:column>
+                        <p:column headerText="Site" sortBy="#{senha.origem}">
+                            <h:outputText value="#{senha.origem}"></h:outputText>
+                        </p:column>
+                        <p:column headerText="Senha" >
+                            <h:outputText value="#{senha.senha}"></h:outputText>
+                        </p:column>
+
+
+
+                    </p:dataTable>
+
+                </b:panel>
+
+            </h:form>
+
+
+        </b:container>
+
+
+
+    </h:body>
+</html>
+
